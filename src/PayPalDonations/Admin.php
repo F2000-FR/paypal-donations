@@ -180,6 +180,20 @@ class PayPalDonations_Admin
             self::PAGE_SLUG
         );
         add_settings_field(
+            'utf8_encoding',
+            __('UTF-8 encoding', PayPalDonations::TEXT_DOMAIN),
+            array($this, 'utf8Callback'),
+            self::PAGE_SLUG,
+            'default_section',
+            array(
+                'label_for' => 'utf8_encoding',
+                'description' => __(
+                    'Send data as UTF-8 (Optional).',
+                    PayPalDonations::TEXT_DOMAIN
+                ),
+            )
+        );
+        add_settings_field(
             'amount',
             __('Amount', PayPalDonations::TEXT_DOMAIN),
             array($this, 'amountCallback'),
@@ -485,6 +499,23 @@ class PayPalDonations_Admin
         echo "<input class='regular-text' type='text' id='amount' ";
         echo "name='{$optionKey}[amount]'' ";
         echo "value='{$options['amount']}' />";
+
+        echo "<p class='description'>{$args['description']}</p>";
+    }
+
+    public function utf8Callback($args)
+    {
+        $optionKey = PayPalDonations::OPTION_DB_KEY;
+        $options = get_option($optionKey);
+        $checked = isset($options['utf8_encoding']) ?
+            $options['utf8_encoding'] :
+            false;
+        echo "<input type='checkbox' id='utf8_encoding' ";
+        echo "name='{$optionKey}[utf8_encoding]' value='1' ";
+        if ($checked) {
+            echo 'checked ';
+        }
+        echo " />";
 
         echo "<p class='description'>{$args['description']}</p>";
     }

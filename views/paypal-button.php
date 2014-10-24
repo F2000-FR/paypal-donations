@@ -17,6 +17,8 @@ if (isset($pd_options['new_tab'])) {
         $indent = str_repeat(" ", 8);
 
         // Optional Settings
+        if ($pd_options['utf8_encoding'])
+            $paypal_btn .=  $indent.'<input type="hidden" name="charset" value="utf-8" />'.PHP_EOL;
         if ($pd_options['page_style'])
             $paypal_btn .=  $indent.'<input type="hidden" name="page_style" value="' .$pd_options['page_style']. '" />'.PHP_EOL;
         if ($return_page)
