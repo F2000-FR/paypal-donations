@@ -526,7 +526,7 @@ class PayPalDonations_Admin
         $options = get_option($optionKey);
         echo "<input class='regular-text' type='text' id='purpose' ";
         echo "name='{$optionKey}[purpose]'' ";
-        echo "value='{$options['purpose']}' />";
+        echo "value=\"{$options['purpose']}\" />";
 
         echo "<p class='description'>{$args['description']}</p>";
     }
